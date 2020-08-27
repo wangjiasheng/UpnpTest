@@ -39,8 +39,8 @@ find_library(log-lib log )
 
 target_link_libraries(native-lib
         libdlna
+        libupnp
         libixml
-
         libavformat
         libavcodec
         libavdevice

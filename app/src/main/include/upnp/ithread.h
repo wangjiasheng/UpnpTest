@@ -50,10 +50,14 @@ extern "C" {
 
 #include <pthread.h>
 
+
 #define PTHREAD_MUTEX_RECURSIVE_NP PTHREAD_MUTEX_RECURSIVE
-	#define ITHREAD_MUTEX_FAST_NP PTHREAD_MUTEX_NORMAL
-	#define ITHREAD_MUTEX_RECURSIVE_NP PTHREAD_MUTEX_RECURSIVE
-	#define ITHREAD_MUTEX_ERRORCHECK_NP PTHREAD_MUTEX_ERRORCHECKz
+
+
+
+#define ITHREAD_MUTEX_FAST_NP PTHREAD_MUTEX_NORMAL
+#define ITHREAD_MUTEX_RECURSIVE_NP PTHREAD_MUTEX_RECURSIVE
+#define ITHREAD_MUTEX_ERRORCHECK_NP PTHREAD_MUTEX_ERRORCHECK
 
 
 #define ITHREAD_PROCESS_PRIVATE PTHREAD_PROCESS_PRIVATE
@@ -293,11 +297,8 @@ static UPNP_INLINE int ithread_cleanup_thread(void)
  *      Returns EINVAL if the kind is not supported.
  *      See man page for pthread_mutexattr_setkind_np
  *****************************************************************************/
-#if defined(PTHREAD_MUTEX_RECURSIVE) || defined(__DragonFly__)
-	#define ithread_mutexattr_setkind_np pthread_mutexattr_settype
-#else
-	#define ithread_mutexattr_setkind_np pthread_mutexattr_setkind_np
-#endif /* UPNP_USE_RWLOCK */
+
+#define ithread_mutexattr_setkind_np pthread_mutexattr_settype
 
 /****************************************************************************
  * Function: ithread_mutexattr_getkind_np

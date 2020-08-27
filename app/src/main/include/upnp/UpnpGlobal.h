@@ -10,7 +10,7 @@
 #if defined UPNP_LARGEFILE_SENSITIVE && _FILE_OFFSET_BITS+0 != 64
 	#if defined __GNUC__
 		#warning libupnp requires largefile mode - use AC_SYS_LARGEFILE
-	#else
+	#elif !defined _WIN32
 		#error  libupnp requires largefile mode - use AC_SYS_LARGEFILE
 	#endif
 #endif
@@ -19,17 +19,21 @@
 	/*
 	 * EXPORT_SPEC
 	 */
-	#ifdef UPNP_STATIC_LIB
+	#if defined _MSC_VER || defined __BORLANDC__
+		#ifdef UPNP_STATIC_LIB
+			#define EXPORT_SPEC
+		#else /* UPNP_STATIC_LIB */
+			#ifdef LIBUPNP_EXPORTS
+				/*! set up declspec for dll export to make functions
+				 * visible to library users */
+				#define EXPORT_SPEC __declspec(dllexport)
+			#else /* LIBUPNP_EXPORTS */
+				#define EXPORT_SPEC __declspec(dllimport)
+			#endif /* LIBUPNP_EXPORTS */
+		#endif /* UPNP_STATIC_LIB */
+	#else /* _MSC_VER || __BORLANDC__ */
 		#define EXPORT_SPEC
-	#else /* UPNP_STATIC_LIB */
-		#ifdef LIBUPNP_EXPORTS
-			/*! set up declspec for dll export to make functions
-			 * visible to library users */
-			#define EXPORT_SPEC __declspec(dllexport)
-		#else /* LIBUPNP_EXPORTS */
-			#define EXPORT_SPEC __declspec(dllimport)
-		#endif /* LIBUPNP_EXPORTS */
-	#endif /* UPNP_STATIC_LIB */
+	#endif /* _MSC_VER || __BORLANDC__ */
 
 	/*
 	 * UPNP_INLINE

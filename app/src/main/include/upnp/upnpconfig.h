@@ -39,16 +39,16 @@
  ***************************************************************************/
 
 /** The library version (string) e.g. "1.3.0" */
-#define UPNP_VERSION_STRING "1.12.1"
+#define UPNP_VERSION_STRING "1.14.0"
 
 /** Major version of the library */
 #define UPNP_VERSION_MAJOR 1
 
 /** Minor version of the library */
-#define UPNP_VERSION_MINOR 12
+#define UPNP_VERSION_MINOR 14
 
 /** Patch version of the library */
-#define UPNP_VERSION_PATCH 1
+#define UPNP_VERSION_PATCH 0
 
 /** The library version (numeric) e.g. 10300 means version 1.3.0 */
 #define UPNP_VERSION \

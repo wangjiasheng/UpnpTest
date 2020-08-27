@@ -152,7 +152,7 @@ typedef struct dlna_profile_s {
   /* Profile Label */
   const char *label;
   /* Profile type: IMAGE / AUDIO / AV */
-  dlna_media_class_t class;
+  dlna_media_class_t clazz;
 } dlna_profile_t;
 
 /**
